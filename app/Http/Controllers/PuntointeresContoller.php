@@ -20,7 +20,7 @@ class PuntointeresContoller extends Controller
      */
     public function create()
     {
-        //
+        return view('puntointeres.nuevo');
     }
 
     /**
@@ -28,7 +28,16 @@ class PuntointeresContoller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos = [
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'categoria' => $request->categoria,
+            'imagen' => $request->imagen,
+            'latitud' => $request->latitud,
+            'longitud' => $request->longitud,
+        ];
+        puntointeres::create($datos);
+        return redirect()->route('puntos.index');
     }
 
     /**
