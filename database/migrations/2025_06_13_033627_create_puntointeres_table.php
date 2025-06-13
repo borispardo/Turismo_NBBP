@@ -9,20 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('punto_interes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('nombre');
-            $table->string('descripcion');
-            $table->string('categoria');
-            $table->string('imagen');
-            $table->double('latitud');
-            $table->double('longitud');
-
-        });
-    }
+    public function up()
+{
+    Schema::create('punto_interes', function (Blueprint $table) {
+        $table->id();
+        $table->string('nombre');
+        $table->text('descripcion');
+        $table->string('categoria');
+        $table->string('imagen')->nullable();
+        $table->decimal('latitud', 10, 7);
+        $table->decimal('longitud', 10, 7);
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
