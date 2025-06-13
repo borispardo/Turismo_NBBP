@@ -5,7 +5,7 @@
     <h1 class="text-primary mt-3">Puntos de Interés</h1>
 
     <a href="{{ route('puntos.create') }}" class="btn btn-primary mb-3">Agregar Punto de Interés</a>
-    <a href="{{ route('puntos.mapa') }}" class="btn btn-success mb-3">Mapa de Puntos</a>
+    <a href="{{ url('puntos/mapa') }}" class="btn btn-success mb-3">Mapa de Puntos</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>

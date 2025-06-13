@@ -1,37 +1,37 @@
 @extends('layout.app')
 
 @section('Contenido')
-<br>
-<h1>MAPA DE PUNTOS</h1>
-<br>
-<div class="container-fluid">
-    <div id="mapa-puntos" style="border: 1px solid black; height: 500px; width: 100%; margin-top: 10px; margin-bottom: 20px;"></div>
+<div class="container">
+    <h2 class="text-center mb-4">Mapa de Puntos de Interés</h2>
+    <div id="mapa" style="height: 500px; width: 100%; border: 2px solid #ccc;"></div>
 </div>
 
-<script type="text/javascript">
+@push('scripts')
+<script>
     function initMap() {
-        var latlng = new google.maps.LatLng(-0.9374805, -78.6161327);
-        var mapa = new google.maps.Map(document.getElementById('mapa-puntos'), {
-            center: latlng,
+        const centro = { lat: -1.8312, lng: -78.1834 };
+        const map = new google.maps.Map(document.getElementById("mapa"), {
             zoom: 7,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            center: centro,
         });
 
-        @foreach($puntos as $playa)
-            var punto = new google.maps.LatLng({{ $playa->latitud }}, {{ $playa->longitud }});
-            var marcador = new google.maps.Marker({
-                position: punto,
-                map: mapa,
-                icon: 'https://cdn-icons-png.flaticon.com/32/1077/1077012.png',
-                title: "{{ $playa->nombre }}",
-                draggable: false
+        @foreach($puntos as $p)
+            const marcador = new google.maps.Marker({
+                position: { lat: {{ $p->latitud }}, lng: {{ $p->longitud }} },
+                map,
+                title: "{{ $p->nombre }}",
+                icon: "https://cdn-icons-png.flaticon.com/32/684/684908.png"
+            });
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: `<strong>{{ $p->nombre }}</strong><br>{{ $p->descripcion }}<br><em>{{ $p->categoria }}</em>`
+            });
+
+            marcador.addListener("click", () => {
+                infoWindow.open(map, marcador);
             });
         @endforeach
-    }    
-
-    window.onload = function() {
-        initMap();
-    };
+    }
 </script>
-
+@endpush
 @endsection

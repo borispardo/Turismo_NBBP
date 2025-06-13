@@ -7,4 +7,4 @@ use App\Http\Controllers\PuntoInteresController;
 Route::get('/puntointeres',[PuntoInteresController::class,'index']);
 Route::get('/puntos/mapa',[PuntoInteresController::class,'mapa']);
 Route::resource('puntos', PuntoInteresController::class);
-Route::get('/punto/mapa',[PuntoInteresController::class,'mapa']);
+
