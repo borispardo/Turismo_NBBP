@@ -1,6 +1,26 @@
 @extends('layout.app')
 
 @section('Contenido')
+
+@if(session('message'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+@endif
+
+@if($errors->any())
+    <div class="alert alert-danger">
+        <strong>¡Error!</strong> Por favor corrige los siguientes errores:
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 <form action="{{ route('puntos.update', $interesT->id) }}" method="POST" enctype="multipart/form-data"
     style="width: 60%; margin: auto; font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
     @csrf
