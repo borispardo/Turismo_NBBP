@@ -11,7 +11,8 @@ class PuntointeresContoller extends Controller
      */
     public function index()
     {
-        //
+        $interes= puntointeres::all();
+        return view('puntointeres.index',compact('interes'));
     }
 
     /**
