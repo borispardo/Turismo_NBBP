@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PuntoInteres; 
 
-class PuntointeresContoller extends Controller
+class PuntoInteresContoller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $interes= puntointeres::all();
-        return view('puntointeres.index',compact('interes'));
+        $puntos= PuntoInteres::all();
+        return view('puntointeres.index',compact('puntos'));
     }
 
     /**
@@ -36,7 +37,7 @@ class PuntointeresContoller extends Controller
             'latitud' => $request->latitud,
             'longitud' => $request->longitud,
         ];
-        puntointeres::create($datos);
+        PuntoInteres::create($datos);
         return redirect()->route('puntos.index');
     }
 

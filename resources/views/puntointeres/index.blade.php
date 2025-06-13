@@ -1,7 +1,7 @@
-<h1>LIstado de Puntos de Intereses</h1>
-<a href="#">Agregar Punto de Interes</a>
+<h1>Listado de Puntos de Intereses</h1>
+<a href="{{ route('puntos.create') }}">Agregar Punto de Interes</a>
 <ul>
-    @foreach($interes as $interesT)
+    @foreach($puntos as $interesT)
         <li>
             {{$interesT->nombre}}
             {{$interesT->descripcion}}

@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class puntointeres extends Model
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+ 
+class PuntoInteres extends Model
 {
     use HasFactory;
 
