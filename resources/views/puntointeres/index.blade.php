@@ -6,7 +6,8 @@
 
     <a href="{{ route('puntos.create') }}" class="btn btn-primary mb-3">Agregar Punto de Interés</a>
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="{{ route('puntos.index') }}" class="btn btn-primary mb-3">Volver</a>
+    <a href="{{ url('puntos/mapa') }}" class="btn btn-primary mb-3">Mapa de Puntos de Interés</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
 
     <table class="table table-bordered table-striped table-hover mt-5">
         <thead class="thead-dark">
