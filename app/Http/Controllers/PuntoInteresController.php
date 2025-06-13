@@ -16,6 +16,12 @@ class PuntoInteresController extends Controller
         return view('puntointeres.index',compact('puntos'));
     }
 
+    public function mapa()
+    {
+        $puntos= PuntoInteres::all();
+        return view('puntointeres.mapa',compact('puntos'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -28,18 +34,20 @@ class PuntoInteresController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $datos = [
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'categoria' => $request->categoria,
-            'imagen' => $request->imagen,
-            'latitud' => $request->latitud,
-            'longitud' => $request->longitud,
-        ];
-        PuntoInteres::create($datos);
-        return redirect()->route('puntos.index');
+{
+    $datos = $request->only(['nombre', 'descripcion', 'categoria', 'latitud', 'longitud']);
+
+    if ($request->hasFile('imagen')) {
+        $archivo = $request->file('imagen');
+        $nombreArchivo = time().'_'.$archivo->getClientOriginalName();
+        $archivo->move(public_path('imagenes'), $nombreArchivo);
+        $datos['imagen'] = $nombreArchivo;
     }
+
+    PuntoInteres::create($datos);
+
+    return redirect()->route('puntos.index')->with('message', 'Punto creado correctamente');
+}
 
     /**
      * Display the specified resource.
