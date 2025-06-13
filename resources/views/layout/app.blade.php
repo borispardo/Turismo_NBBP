@@ -30,6 +30,16 @@
     <!-- Main CSS -->
     <link href="{{ asset('real/css/style.css') }}" rel="stylesheet">
 
+    <!--Importacion de JQuery-->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <!-- Validation  es un framework para programar de mejor maneja en javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+    
+    <!--Importar file input drag on drop para pdf  cdnjs  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/js/fileinput.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/css/fileinput.min.css">
+
     @stack('styles')
 </head>
 
