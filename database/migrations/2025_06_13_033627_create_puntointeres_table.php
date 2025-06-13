@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('puntointeres', function (Blueprint $table) {
+        Schema::create('punto_interes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->string('categoria');
+            $table->string('imagen');
+            $table->double('latitud');
+            $table->double('longitud');
+
         });
     }
 
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('puntointeres');
+        Schema::dropIfExists('punto_interes');
     }
 };
