@@ -34,7 +34,6 @@
     function initMap() {
         alert("Cargando el mapa, por favor espere...");
 
-
         var latitud_longitud = new google.maps.LatLng(-0.9374805, -78.6161327);
         var mapa = new google.maps.Map(document.getElementById('mapa_cliente'), {
             center: latitud_longitud,
