@@ -1,9 +1,10 @@
 @extends('layout.app')
 
 @section('Contenido')
-<form action="{{ route('puntos.update', $interesT->id) }}" method="post" enctype="multipart/form-data"
+<form action="{{ route('puntos.update', $interesT->id) }}" method="POST" enctype="multipart/form-data"
     style="width: 60%; margin: auto; font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
     @csrf
+    @method('PUT')
     <h1 style="text-align: center;">Editar Punto</h1>
 
     <label for="nombre" style="font-weight: bold;">Nombre:</label><br>

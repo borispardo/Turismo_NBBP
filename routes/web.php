@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PuntoInteresContoller;
+use App\Http\Controllers\PuntoInteresController;
 
-Route::get('/puntointeres',[PuntoInteresContoller::class,'index']);
-Route::resource('puntos', PuntoInteresContoller::class);
+
+Route::get('/puntointeres',[PuntoInteresController::class,'index']);
+Route::resource('puntos', PuntoInteresController::class);

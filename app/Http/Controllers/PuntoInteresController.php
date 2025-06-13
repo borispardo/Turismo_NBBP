@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PuntoInteres; 
 
-class PuntoInteresContoller extends Controller
+class PuntoInteresController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -61,33 +61,34 @@ class PuntoInteresContoller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        $interes = PuntoInteres::findOrFail($id);
+    public function update(Request $request, $id)
+{
+    $punto = PuntoInteres::findOrFail($id);
+    $punto->nombre = $request->nombre;
+    $punto->descripcion = $request->descripcion;
+    $punto->categoria = $request->categoria;
+    $punto->latitud = $request->latitud;
+    $punto->longitud = $request->longitud;
 
-        $rutaImagen = $interes->hasFile('imagen') 
-        ? $request->file('imagen')->store('puntointeres', 'public') 
-        : $interes->imagen;
-
-        $datos = [
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'categoria' => $request->categoria,
-            'imagen' => $rutaImagen,
-            'latitud' => $request->latitud,
-            'longitud' => $request->longitud,
-        ];
-
-        $interes->update($datos);
-        return redirect()->route('puntos.index');
+    if ($request->hasFile('imagen')) {
+        $archivo = $request->file('imagen');
+        $nombreArchivo = time().'_'.$archivo->getClientOriginalName();
+        $archivo->move(public_path('imagenes'), $nombreArchivo);
+        $punto->imagen = $nombreArchivo;
     }
+
+    $punto->save();
+
+    return redirect()->route('puntos.index')->with('message', 'Punto actualizado correctamente');
+}
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $interes = PuntoInteres::findl($id);
+        $interes = PuntoInteres::find($id);
         $interes->delete();
         return redirect()->route('puntos.index');
     }
