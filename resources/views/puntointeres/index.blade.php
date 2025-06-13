@@ -8,7 +8,14 @@
     <a href="{{ url('puntos/mapa') }}" class="btn btn-success mb-3">Mapa de Puntos</a>
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: '{{ session('success') }}',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
     @endif
 
     <table class="table table-bordered table-striped">
@@ -40,10 +47,11 @@
                     <td>{{ $punto->longitud }}</td>
                     <td>
                         <a href="{{ route('puntos.edit', $punto->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('puntos.destroy', $punto->id) }}" method="POST" style="display:inline-block;">
+
+                        <form action="{{ route('puntos.destroy', $punto->id) }}" method="POST" class="form-eliminar d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este punto?')">Eliminar</button>
+                            <button type="submit" class="btn btn-danger btn-sm eliminar-btn" data-nombre="{{ $punto->nombre }}">Eliminar</button>
                         </form>
                     </td>
                 </tr>
@@ -51,4 +59,36 @@
         </tbody>
     </table>
 </div>
+
+<!-- Librería SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const eliminarBtns = document.querySelectorAll('.eliminar-btn');
+
+        eliminarBtns.forEach(boton => {
+            boton.addEventListener('click', function (e) {
+                e.preventDefault();
+                const form = this.closest('form');
+                const nombre = this.dataset.nombre;
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: `Esta acción eliminará el punto: "${nombre}"`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
 @endsection
