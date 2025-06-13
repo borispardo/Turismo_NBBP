@@ -63,7 +63,23 @@ class PuntoInteresContoller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        $interes = PuntoInteres::findOrFail($id);
+
+        $rutaImagen = $interes->hasFile('imagen') 
+        ? $request->file('imagen')->store('puntointeres', 'public') 
+        : $interes->imagen;
+
+        $datos = [
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'categoria' => $request->categoria,
+            'imagen' => $rutaImagen,
+            'latitud' => $request->latitud,
+            'longitud' => $request->longitud,
+        ];
+
+        $interes->update($datos);
+        return redirect()->route('puntos.index');
     }
 
     /**
