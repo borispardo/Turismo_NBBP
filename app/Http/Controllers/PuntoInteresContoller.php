@@ -87,6 +87,8 @@ class PuntoInteresContoller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $interes = PuntoInteres::findl($id);
+        $interes->delete();
+        return redirect()->route('puntos.index');
     }
 }
