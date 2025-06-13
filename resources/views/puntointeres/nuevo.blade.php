@@ -26,3 +26,28 @@
     <button type="submit" class="btn btn-success">Guardar</button>
     <a href="{{ route('puntos.index') }}" class="btn btn-danger" style="margin-left: 10px;">Cancelar</a>
 </form>
+
+<script type="text/javascript">
+    function initMap() {
+        var latitud_longitud = new google.maps.LatLng(-0.9374805, -78.6161327);
+        var mapa = new google.maps.Map(document.getElementById('mapa_cliente'), {
+            center: latitud_longitud,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var marcador = new google.maps.Marker({
+            position: latitud_longitud,
+            map: mapa,
+            title: "Seleccione la dirección",
+            draggable: true
+        });
+
+        google.maps.event.addListener(marcador, 'dragend', function () {
+            var latitud = this.getPosition().lat();
+            var longitud = this.getPosition().lng();
+            document.getElementById("latitud").value = latitud;
+            document.getElementById("longitud").value = longitud;
+        });
+    }
+</script>
