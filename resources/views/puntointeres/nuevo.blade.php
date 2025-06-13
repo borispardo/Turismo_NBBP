@@ -1,3 +1,6 @@
+@extends('layout.app')
+
+@section('Contenido')
 <form action="{{ route('puntos.store') }}" method="post" enctype="multipart/form-data"
     style="width: 60%; margin: auto; font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
     @csrf
@@ -29,6 +32,9 @@
 
 <script type="text/javascript">
     function initMap() {
+        alert("Cargando el mapa, por favor espere...");
+
+
         var latitud_longitud = new google.maps.LatLng(-0.9374805, -78.6161327);
         var mapa = new google.maps.Map(document.getElementById('mapa_cliente'), {
             center: latitud_longitud,
@@ -51,3 +57,4 @@
         });
     }
 </script>
+@endsection
