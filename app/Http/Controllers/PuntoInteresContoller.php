@@ -54,7 +54,8 @@ class PuntoInteresContoller extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $interesT = PuntoInteres::find($id);
+        return view('puntointeres.editar',compact('interesT'));
     }
 
     /**
@@ -62,7 +63,7 @@ class PuntoInteresContoller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**
