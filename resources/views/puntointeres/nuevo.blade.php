@@ -28,6 +28,53 @@
 
     <button type="submit" class="btn btn-success">Guardar</button>
     <a href="{{ route('puntos.index') }}" class="btn btn-danger" style="margin-left: 10px;">Cancelar</a>
+
+    <script>
+    $(document).ready(function () {
+        $("form").validate({
+            rules: {
+                nombre: { required: true, minlength: 3 },
+                descripcion: { required: true, minlength: 5 },
+                categoria: { required: true },
+                latitud: { required: true, number: true },
+                longitud: { required: true, number: true }
+            },
+            messages: {
+                nombre: "Por favor ingrese el nombre (mínimo 3 caracteres)",
+                descripcion: "Por favor ingrese una descripción válida",
+                categoria: "Seleccione una categoría",
+                latitud: "Debe seleccionar la ubicación en el mapa",
+                longitud: "Debe seleccionar la ubicación en el mapa"
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            highlight: function (element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+        // Validación para fileinput
+        $("#imagen").fileinput({
+            language: "es",
+            allowedFileExtensions: ["png", "jpg", "jpeg"],
+            showCaption: false,
+            dropZoneEnabled: true,
+            showClose: false,
+            showUpload: false,
+            browseLabel: "Seleccionar imagen",
+            removeLabel: "Eliminar",
+            removeClass: "btn btn-danger",
+            allowedPreviewTypes: ['image'],
+            maxFileSize: 2048,
+            msgSizeTooLarge: "El archivo '{name}' excede el tamaño máximo permitido de 2MB.",
+            msgInvalidFileExtension: "Extensión no permitida para el archivo '{name}'."
+        });
+    });
+</script>
+
 </form>
 
 <script type="text/javascript">
